@@ -160,17 +160,16 @@ export default function Home(){
             }
             if(levelList.length != 0){
               level = levelList[0].value
-              risks.push(tempList[0].risk)
+              risks.push(levelList[0].risk)
             }
             if(pressureList.length != 0){
               pressure = pressureList[0].value
-              risks.push(tempList[0].risk)
+              risks.push(pressureList[0].risk)
             }
 
             const tankClassName = Math.max(...risks) > threshold ? "bg-[#df3a66]" : "bg-[#5338f0]"
             const sensorClassName = Math.max(...risks) > threshold ? "bg-gradient-to-r from-[#df3a66] to-[#e42f41]" : "bg-gradient-to-r from-[#2C68E7] to-[#542aef]"
 
-            console.log(Math.max(...risks))
             return(
               <div className="relative" key={idx}> {/*tank image & card*/}
                 <img src="/img/tank_normal.png" className="w-[80px] h-[130px]"/>
