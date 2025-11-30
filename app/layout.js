@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
+import ModelProgress from "./components/model_progress";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +22,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full`}
       >
+          <div className="flex h-20 items-center w-full">
+            <img src="/img/logo_KIBO.png" className="ml-5 mr-5 h-[100px]"/>
+            <img src="/img/logo_Hyundai.png" className="mr-2 h-[60px]"/>
+          </div>
         {children}
       </body>
     </html>

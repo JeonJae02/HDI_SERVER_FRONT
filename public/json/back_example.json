@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-11-30 14:05:10",
+  "logs": [
+    { "time": "14:05:01", "name": "Pump_Trip_Alarm", "status": "OCCURRED", "code": 1 },
+    { "time": "14:04:45", "name": "Tank_Level_Low", "status": "RESOLVED", "code": 0 }
+  ],
+  "prediction": {
+    "score": 0.1234,
+    "causes": [  
+       { "sensor": "U322", "risk": 0.85 },
+       { "sensor": "D100", "risk": 0.45 }
+    ]
+  },
+  "sensors": { 
+    "U322": { "value": 5000.0, "risk": 0.85 },
+    "U323": { "value": 100.0,  "risk": 0.01 },
+    "D1009": { "value": -5.0,  "risk": 0.00 }
+  }
+}

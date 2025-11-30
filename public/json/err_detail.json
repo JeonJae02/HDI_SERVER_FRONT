@@ -1,0 +1,41 @@
+{
+  "items": [
+    { "location": "워킹 Tank 3 ISO",      "factor": "Level",          "weight": 20.1 },
+    { "location": "워킹 Tank 3-2 CUSH",   "factor": "Level",          "weight": 16.5 },
+    { "location": "워킹 Tank 1 BACK",     "factor": "Jack Temp",      "weight": 33.1 },
+    { "location": "워킹 Tank 1 ISO",      "factor": "Jack Temp",      "weight": 8.1 },
+    { "location": "1-1 펌프 ISO",          "factor": "Pump Pressure",  "weight": 18.9 },
+    { "location": "1-2 펌프 CUSH",         "factor": "Pump Pressure",  "weight": 24.2 },
+
+    { "location": "워킹 Tank 2 ISO",      "factor": "Level",          "weight": 12.7 },
+    { "location": "워킹 Tank 2-1 CUSH",   "factor": "Level",          "weight": 27.9 },
+    { "location": "워킹 Tank 4 BACK",     "factor": "Jack Temp",      "weight": 29.3 },
+    { "location": "워킹 Tank 4 ISO",      "factor": "Jack Temp",      "weight": 15.4 },
+
+    { "location": "1-3 펌프 ISO",          "factor": "Pump Pressure",  "weight": 22.8 },
+    { "location": "1-4 펌프 CUSH",         "factor": "Pump Pressure",  "weight": 19.3 },
+    { "location": "1-5 펌프 BACK",         "factor": "Pump Pressure",  "weight": 30.7 },
+
+    { "location": "워킹 Tank 5 ISO",      "factor": "Level",          "weight": 11.8 },
+    { "location": "워킹 Tank 5-1 CUSH",   "factor": "Level",          "weight": 25.4 },
+    { "location": "워킹 Tank 6 BACK",     "factor": "Jack Temp",      "weight": 37.5 },
+    { "location": "워킹 Tank 6 ISO",      "factor": "Jack Temp",      "weight": 13.2 },
+
+    { "location": "2-1 펌프 ISO",          "factor": "Pump Pressure",  "weight": 17.4 },
+    { "location": "2-2 펌프 CUSH",         "factor": "Pump Pressure",  "weight": 28.1 },
+    { "location": "2-3 펌프 BACK",         "factor": "Pump Pressure",  "weight": 21.6 },
+
+    { "location": "워킹 Tank 7 ISO",      "factor": "Level",          "weight": 14.9 },
+    { "location": "워킹 Tank 7-2 CUSH",   "factor": "Level",          "weight": 19.7 },
+    { "location": "워킹 Tank 8 BACK",     "factor": "Jack Temp",      "weight": 31.2 },
+    { "location": "워킹 Tank 8 ISO",      "factor": "Jack Temp",      "weight": 10.6 },
+
+    { "location": "3-1 펌프 ISO",          "factor": "Pump Pressure",  "weight": 26.3 },
+    { "location": "3-2 펌프 CUSH",         "factor": "Pump Pressure",  "weight": 23.9 },
+    { "location": "3-3 펌프 BACK",         "factor": "Pump Pressure",  "weight": 34.5 },
+
+    { "location": "워킹 Tank 9 ISO",      "factor": "Level",          "weight": 17.2 },
+    { "location": "워킹 Tank 9-1 CUSH",   "factor": "Level",          "weight": 22.5 },
+    { "location": "워킹 Tank 10 BACK",    "factor": "Jack Temp",      "weight": 35.8 }
+  ]
+}

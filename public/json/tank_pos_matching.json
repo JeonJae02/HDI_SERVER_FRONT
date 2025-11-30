@@ -1,0 +1,122 @@
+{
+  "U322": {
+    "location": "워킹 Tank 1 BACK",
+    "factor": "Level"
+  },
+  "U323": {
+    "location": "워킹 Tank 1 ISO",
+    "factor": "Level"
+  },
+  "U324": {
+    "location": "워킹 Tank 2-1 SOFT",
+    "factor": "Level"
+  },
+  "U325": {
+    "location": "워킹 Tank 2 MDI",
+    "factor": "Level"
+  },
+  "U326": {
+    "location": "워킹 Tank 2-2 HARD",
+    "factor": "Level"
+  },
+  "U327": {
+    "location": "워킹 Tank 3-1 고탄성",
+    "factor": "Level"
+  },
+  "U328": {
+    "location": "워킹 Tank 3 ISO",
+    "factor": "Level"
+  },
+  "U329": {
+    "location": "워킹 Tank 3-2 CUSH",
+    "factor": "Level"
+  },
+  "U330": {
+    "location": "워킹 Tank 1 BACK ",
+    "factor": "Temp"
+  },
+  "U331": {
+    "location": "워킹 Tank 1 ISO ",
+    "factor": "Temp"
+  },
+  "U332": {
+    "location": "워킹 Tank 2-1 SOFT ",
+    "factor": "Temp"
+  },
+  "U333": {
+    "location": "워킹 Tank 2 MDI ",
+    "factor": "Temp"
+  },
+  "U334": {
+    "location": "워킹 Tank 2-2 HARD ",
+    "factor": "Temp"
+  },
+  "U335": {
+    "location": "워킹 Tank 3-1 고탄성 ",
+    "factor": "Temp"
+  },
+  "U336": {
+    "location": "워킹 Tank 3 ISO ",
+    "factor": "Temp"
+  },
+  "U337": {
+    "location": "워킹 Tank 3-2 CUSH ",
+    "factor": "Temp"
+  },
+  "U514": {
+    "location": "1-1 펌프 BACK Pump ",
+    "factor": "Pressure"
+  },
+  "U515": {
+    "location": "1-1 펌프 ISO Pump",
+    "factor": "Pressure"
+  },
+  "U516": {
+    "location": "1-2 펌프 CUSH Pump ",
+    "factor": "Pressure"
+  },
+  "U517": {
+    "location": "1-2 펌프 ISO Pump",
+    "factor": "Pressure"
+  },
+  "U518": {
+    "location": "2-1 펌프 Soft Pump",
+    "factor": "Pressure"
+  },
+  "U519": {
+    "location": "2-1 펌프 MDI Pump",
+    "factor": "Pressure"
+  },
+  "U520": {
+    "location": "2-2 펌프 HARD Pump",
+    "factor": "Pressure"
+  },
+  "U521": {
+    "location": "2-2 펌프 MDI Pump ",
+    "factor": "Pressure"
+  },
+  "U546": {
+    "location": "2-1 펌프 SOFT Pump Return Pressure Hydac",
+    "factor": "Pressure"
+  },
+  "U547": {
+    "location": "2-1 펌프 MDI Pump Return Pressure Hydac",
+    "factor": "Pressure"
+  },
+  "U548": {
+    "location": "RAW_EX_I1",
+    "factor": "온도값"
+  },
+  "U549": {
+    "location": "RAW_EX_I3",
+    "factor": "온도값"
+  },
+  "U550": {
+    "location": "PT_P6",
+    "factor": "압력값"
+  },
+  "U551": {
+    "location": "3-1 펌프 ISO Return Pressure Hydac",
+    "factor": "Pressure"
+  }
+}
