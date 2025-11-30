@@ -12,6 +12,7 @@ export default function Home(){
   // const [temp2, setTemp2] = useState([]) //temperature list 2 of bottom tanks
   // const [pressure, setPressure] = useState([])
   const tanks = ["워킹 Tank 1 BACK", "워킹 Tank 1 ISO", "워킹 Tank 2-1 SOFT", "워킹 Tank 2 MDI", "워킹 Tank 2-2 HARD", "워킹 Tank 3-1 고탄성", "워킹 Tank 3 ISO", "워킹 Tank 3-2 CUSH",]
+  const threshold = 0.70
 
   useEffect(()=>{
     fetch("/json/tank_pos_matching.json")
@@ -151,38 +152,44 @@ export default function Home(){
             let temp = undefined
             let level = undefined
             let pressure = undefined
+            let risks = []
             
             if(tempList.length != 0){
               temp = tempList[0].value
+              risks.push(tempList[0].risk)
             }
             if(levelList.length != 0){
               level = levelList[0].value
+              risks.push(tempList[0].risk)
             }
             if(pressureList.length != 0){
               pressure = pressureList[0].value
+              risks.push(tempList[0].risk)
             }
 
-            // tankClassName =  
+            const tankClassName = Math.max(...risks) > threshold ? "bg-[#df3a66]" : "bg-[#5338f0]"
+            const sensorClassName = Math.max(...risks) > threshold ? "bg-gradient-to-r from-[#df3a66] to-[#e42f41]" : "bg-gradient-to-r from-[#2C68E7] to-[#542aef]"
 
+            console.log(Math.max(...risks))
             return(
               <div className="relative" key={idx}> {/*tank image & card*/}
                 <img src="/img/tank_normal.png" className="w-[80px] h-[130px]"/>
                 <div className="absolute flex left-17 top-4 bg-white/70 text-black rounded-xl px-5 py-3">
-                  <div className="rounded-lg bg-[#5338f0] w-[100px] mr-3 shadow text-white text-center py-3 px-2">
+                  <div className={`rounded-lg bg-[#5338f0] w-[100px] mr-3 shadow ${tankClassName} text-white text-center py-3 px-2`}>
                     <p className="text-[12px] mb-2">{tanks[idx].split(" ")[0]} {tanks[idx].split(" ")[1]} {tanks[idx].split(" ")[2]}</p>
                     <div className="border-b border-white-100"/>
                     <p className="text-[14px] font-bold mt-2">{tanks[idx].split(" ")[3]}</p>
                   </div>
                   <div className="flex flex-col">
-                    {temp && <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
+                    {temp && <div className={`flex rounded-3xl px-1 py-1 ${sensorClassName} text-white w-[70px] mb-2 font-bold text-[12px]`}>
                       <img src="/img/temperature_white.svg" className="w-[15px] mr-2"/>
                       <p>{temp}°C</p>
                     </div>}
-                    {level && <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
+                    {level && <div className={`flex rounded-3xl px-1 py-1 ${sensorClassName} text-white w-[70px] mb-2 font-bold text-[12px]`}>
                       <img src="/img/water_white.svg" className="w-[15px] mr-2"/>
                       <p>{level}%</p>
                     </div>}
-                    {pressure && <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
+                    {pressure && <div className={`flex rounded-3xl px-1 py-1 ${sensorClassName} text-white w-[70px] mb-2 font-bold text-[12px]`}>
                       <img src="/img/pressure_white.svg" className="w-[15px] ml-1 mr-2"/>
                       <p>{pressure}VAR</p>
                     </div>}
