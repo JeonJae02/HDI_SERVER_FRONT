@@ -7,9 +7,10 @@ export default function Home(){
   const [details, setDetails] = useState([])
   const [matches, setMatches] = useState([])
   const [positions, setPositions] = useState([])
-  const [temp1, setTemp1] = useState([]) //temperature list 1 of bottom tanks
-  const [temp2, setTemp2] = useState([]) //temperature list 2 of bottom tanks
-  const [pressure, setPressure] = useState([])
+  const [sensors, setSensors] = useState([])
+  // const [temp1, setTemp1] = useState([]) //temperature list 1 of bottom tanks
+  // const [temp2, setTemp2] = useState([]) //temperature list 2 of bottom tanks
+  // const [pressure, setPressure] = useState([])
   const tanks = ["워킹 Tank 1 BACK", "워킹 Tank 1 ISO", "워킹 Tank 2-1 SOFT", "워킹 Tank 2 MDI", "워킹 Tank 2-2 HARD", "워킹 Tank 3-1 고탄성", "워킹 Tank 3 ISO", "워킹 Tank 3-2 CUSH",]
 
   useEffect(()=>{
@@ -29,6 +30,7 @@ export default function Home(){
       .sort((a,b) =>b.risk - a.risk)
 
       setDetails(sorted)
+      setSensors(data.sensors)
     })
   },[])
 
@@ -59,26 +61,39 @@ export default function Home(){
 
   //temporary tank implementation - just generate values in random
 
-  useEffect(()=>{
-    const interval = setInterval(()=>{
-      const temp1 = Array.from({length: 8}, ()=>Math.floor(Math.random() * (30 - 10 + 1)) + 10)
-      const temp2 = Array.from({length: 8}, ()=>Math.floor(Math.random() * (30 - 10 + 1)) + 10)
-      const pressure = Array.from({length: 8}, ()=>Math.floor(Math.random() * (100 - 10 + 1)) + 10)
+  // useEffect(()=>{
+  //   const interval = setInterval(()=>{
+  //     const temp1 = Array.from({length: 8}, ()=>Math.floor(Math.random() * (30 - 10 + 1)) + 10)
+  //     const temp2 = Array.from({length: 8}, ()=>Math.floor(Math.random() * (30 - 10 + 1)) + 10)
+  //     const pressure = Array.from({length: 8}, ()=>Math.floor(Math.random() * (100 - 10 + 1)) + 10)
 
-      setTemp1(temp1)
-      setTemp2(temp2)
-      setPressure(pressure)
+  //     setTemp1(temp1)
+  //     setTemp2(temp2)
+  //     setPressure(pressure)
 
-    }, 2000)
+  //   }, 2000)
 
-    return () => clearInterval(interval)
+  //   return () => clearInterval(interval)
 
-  },[])
+  // },[])
 
-  // function getSensorForTank(tankName){
-  //   let result = []
-  //   for 
-  // }
+  function getSensorForTank(tankName){
+    let result = []
+    for (const sensor in matches){
+      if (matches[sensor].location.trim() === tankName.trim()){
+        result.push({
+          sensorId: sensor,
+          factor: matches[sensor].factor,
+          value: sensors[sensor]?.value,
+          risk: sensors[sensor]?.risk
+      })
+      }
+    }
+
+    result.sort((a,b)=>a.factor.localeCompare(b.factor))
+
+    return result
+  }
 
   return(
     <div className="flex flex-col">
@@ -125,9 +140,29 @@ export default function Home(){
         </div>
       </div>
       <div className="flex flex-col px-10 py-15 bg-black w-full mt-5"> {/*tank status color:z #2C68E7*/}
-        <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${temp1.length / 2 }, minmax(0, 1fr))`}}>
-          {temp1.map((temp, idx)=>{
+        <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${tanks.length / 2 }, minmax(0, 1fr))`}}>
+          {tanks.map((tank, idx)=>{
             const tankName = tanks[idx]
+            const sensorInfo = getSensorForTank(tankName)
+            const tempList = sensorInfo.filter(item => item.factor === "Temp")
+            const levelList = sensorInfo.filter(item => item.factor == "Level")
+            const pressureList = sensorInfo.filter(item => item.factor === "Pressure")
+
+            let temp = undefined
+            let level = undefined
+            let pressure = undefined
+            
+            if(tempList.length != 0){
+              temp = tempList[0].value
+            }
+            if(levelList.length != 0){
+              level = levelList[0].value
+            }
+            if(pressureList.length != 0){
+              pressure = pressureList[0].value
+            }
+
+            // tankClassName =  
 
             return(
               <div className="relative" key={idx}> {/*tank image & card*/}
@@ -139,18 +174,18 @@ export default function Home(){
                     <p className="text-[14px] font-bold mt-2">{tanks[idx].split(" ")[3]}</p>
                   </div>
                   <div className="flex flex-col">
-                    <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
+                    {temp && <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
                       <img src="/img/temperature_white.svg" className="w-[15px] mr-2"/>
                       <p>{temp}°C</p>
-                    </div>
-                    <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
-                      <img src="/img/temperature_white.svg" className="w-[15px] mr-2"/>
-                      <p>{temp2[idx] ? temp2[idx] : "Loading..."}°C</p>
-                    </div>
-                    <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
+                    </div>}
+                    {level && <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
+                      <img src="/img/water_white.svg" className="w-[15px] mr-2"/>
+                      <p>{level}%</p>
+                    </div>}
+                    {pressure && <div className="flex rounded-3xl px-1 py-1 bg-gradient-to-r from-[#2C68E7] to-[#542aef] text-white w-[70px] mb-2 font-bold text-[12px]">
                       <img src="/img/pressure_white.svg" className="w-[15px] ml-1 mr-2"/>
-                      <p>{pressure[idx] ? pressure[idx] : "Loading..."}%</p>
-                    </div>
+                      <p>{pressure}VAR</p>
+                    </div>}
                   </div>
                 </div>
             </div>)

@@ -105,15 +105,15 @@
   },
   "U548": {
     "location": "RAW_EX_I1",
-    "factor": "온도값"
+    "factor": "Temp"
   },
   "U549": {
     "location": "RAW_EX_I3",
-    "factor": "온도값"
+    "factor": "Temp"
   },
   "U550": {
     "location": "PT_P6",
-    "factor": "압력값"
+    "factor": "Temp"
   },
   "U551": {
     "location": "3-1 펌프 ISO Return Pressure Hydac",
