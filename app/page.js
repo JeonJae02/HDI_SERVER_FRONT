@@ -22,18 +22,56 @@ export default function Home(){
     })
   },[])
 
-  useEffect(()=>{
-    fetch("/json/back_example.json")
-    .then((res)=>(res.json()))
-    .then((data)=>{
-      setLogs((prev)=>[...prev, ...data.logs])
-      const sorted = data.prediction.causes
-      .sort((a,b) =>b.risk - a.risk)
+    useEffect(() => {
+    // 1. 우리가 만든 Flask 서버의 스트리밍 주소로 연결
+    // (로컬 테스트 시 http://127.0.0.1:5000/api/stream)
+    const eventSource = new EventSource("http://127.0.0.1:5001/api/stream");
 
-      setDetails(sorted)
-      setSensors(data.sensors)
-    })
-  },[])
+    // 2. 서버에서 데이터가 들어올 때마다 실행되는 함수
+    eventSource.onmessage = (event) => {
+      // 들어온 데이터(문자열)를 JSON으로 변환
+      const data = JSON.parse(event.data);
+
+      // (1) 로그 업데이트
+      // 백엔드가 이미 최신 로그 50개를 큐로 관리해서 보내주므로, 
+      // 기존 것에 더하기(...prev)보다는 최신 상태로 덮어쓰는(setLogs)게 깔끔합니다.
+      // 만약 누적해야 한다면 중복 제거 로직이 필요합니다.
+      setLogs(data.logs); 
+
+      // (2) 원인 분석 데이터 정렬 및 업데이트
+      if (data.prediction && data.prediction.causes) {
+        const sorted = data.prediction.causes.sort((a, b) => b.risk - a.risk);
+        setDetails(sorted);
+      }
+      
+      // (3) 기타 센서 데이터나 시간 등도 필요하면 여기서 set함수 호출
+      // setServerTime(data.server_time);
+    };
+
+    // 3. 에러 발생 시 처리
+    eventSource.onerror = (error) => {
+      console.error("SSE 연결 오류:", error);
+      eventSource.close();
+    };
+
+    // 4. [매우 중요] 컴포넌트가 꺼질 때 연결 종료 (메모리 누수 방지)
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
+  // useEffect(()=>{
+  //   fetch("/json/back_example.json")
+  //   .then((res)=>(res.json()))
+  //   .then((data)=>{
+  //     setLogs((prev)=>[...prev, ...data.logs])
+  //     const sorted = data.prediction.causes
+  //     .sort((a,b) =>b.risk - a.risk)
+
+  //     setDetails(sorted)
+  //     setSensors(data.sensors)
+  //   })
+  // },[])
 
   // //timestep, status, error message
   // useEffect(()=>{
