@@ -43,6 +43,7 @@ export default function Home(){
         const sorted = data.prediction.causes.sort((a, b) => b.risk - a.risk);
         setDetails(sorted);
       }
+      setSensors(data.sensors);
       
       // (3) 기타 센서 데이터나 시간 등도 필요하면 여기서 set함수 호출
       // setServerTime(data.server_time);
@@ -193,15 +194,15 @@ export default function Home(){
             let risks = []
             
             if(tempList.length != 0){
-              temp = tempList[0].value
+              temp = tempList[0].value / 100
               risks.push(tempList[0].risk)
             }
             if(levelList.length != 0){
-              level = levelList[0].value
+              level = levelList[0].value / 100
               risks.push(levelList[0].risk)
             }
             if(pressureList.length != 0){
-              pressure = pressureList[0].value
+              pressure = pressureList[0].value / 10
               risks.push(pressureList[0].risk)
             }
 
@@ -220,15 +221,15 @@ export default function Home(){
                   <div className="flex flex-col">
                     {temp && <div className={`flex rounded-3xl px-1 py-1 ${sensorClassName} text-white w-[70px] mb-2 font-bold text-[12px]`}>
                       <img src="/img/temperature_white.svg" className="w-[15px] mr-2"/>
-                      <p>{temp}°C</p>
+                      <p>{temp.toFixed(1)}°C</p>
                     </div>}
                     {level && <div className={`flex rounded-3xl px-1 py-1 ${sensorClassName} text-white w-[70px] mb-2 font-bold text-[12px]`}>
                       <img src="/img/water_white.svg" className="w-[15px] mr-2"/>
-                      <p>{level}%</p>
+                      <p>{level.toFixed(1)}%</p>
                     </div>}
                     {pressure && <div className={`flex rounded-3xl px-1 py-1 ${sensorClassName} text-white w-[70px] mb-2 font-bold text-[12px]`}>
                       <img src="/img/pressure_white.svg" className="w-[15px] ml-1 mr-2"/>
-                      <p>{pressure}VAR</p>
+                      <p>{pressure.toFixed(1)}VAR</p>
                     </div>}
                   </div>
                 </div>
